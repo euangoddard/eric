@@ -1,0 +1,1 @@
+INVITE_SESSION_KEY = "invite_key"

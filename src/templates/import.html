@@ -1,0 +1,14 @@
+{% extends "content_base.html" %}
+
+{% block title %}{{ block.super }} &mdash; import invites{% endblock title %}
+
+{% block page_heading %}Import invites{% endblock page_heading %}
+
+
+{% block page_content %}
+  <form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Import data</button>
+  </form>
+{% endblock page_content %}

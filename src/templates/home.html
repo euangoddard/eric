@@ -1,0 +1,60 @@
+{% extends "content_base.html" %}
+
+{% load serialize_invite from eric %}
+
+{% block title %}{{ block.super }} &mdash; welcome{% endblock title %}
+
+{% block page_heading %}Eric's naming day
+
+{% endblock page_heading %}
+
+
+{% block page_content %}
+  <nav
+    data-invite="{% serialize_invite current_invite %}"
+    data-update-url="{% url 'invitee_updating' invite_key=current_invite.key %}"
+    data-csrf-token="{{ csrf_token }}"
+    ng-controller="CurrentInviteController"
+  >
+    {% verbatim %}
+      <h1>You are cordially invited</h1>
+      <div ng-hide="is_replying">
+        <i></i>
+        <p ng-click="start_replying()">Open</p>
+      </div>
+      <aside ng-show="is_replying">
+        <h2 ng-if="invite.is_complete">You have RSVP'd!</h2>
+        <h2 ng-if="!invite.is_complete">Please RSVP!</h2>
+        <span ng-show="is_saving">Saving...</span>
+        <ul>
+          <li ng-repeat="invitee in invitees">
+            <h5>{{ invitee.name }}</h5>
+            <select
+              ng-model="invitee.is_attending"
+              ng-change="update_invitee(invitee)"
+            >
+              <option
+                ng-repeat="option in options"
+                value="{{ option.value }}"
+                ng-selected="option.value == invitee.is_attending"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+            <textarea
+              ng-model="invitee.special_requirements"
+              ng-blur="update_invitee(invitee)"
+              placeholder="Special requirements"
+            ></textarea>
+          </li>
+        </ul>
+        <i></i>
+        <div ng-click="stop_replying()">Close</div>
+      </aside>
+    {% endverbatim %}
+  </nav>
+  
+  <p class="align-center">
+    <a class="btn" href="{% url 'info' %}">More information about the day</a>
+  </p>
+{% endblock page_content %}

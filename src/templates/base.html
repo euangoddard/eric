@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//fonts.googleapis.com/css?family=Monsieur+La+Doulaise|Open+Sans:400,300" rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'css/eric-naming.css' %}" rel="stylesheet" media="screen">
+    {% block css %}{% endblock %}
+  </head>
+  
+  <body ng-app="eric">
+    {% block content %}{% endblock %}
+    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+    <script src="{% static 'js/eric.js' %}"></script>
+    {% block js %}{% endblock %}
+  </body>
+</html>

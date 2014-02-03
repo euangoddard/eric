@@ -1,0 +1,13 @@
+{% extends "content_base.html" %}
+
+{% block title %}{{ block.super }} &mdash; manage invites{% endblock title %}
+
+{% block page_heading %}Manage invites{% endblock page_heading %}
+
+
+{% block page_content %}
+  <ul>
+    <li><a href="{% url 'data_import' %}">Import invites</a></li>
+    <li><a href="{% url 'data_export' %}">Download invites data</a></li>
+  </ul>
+{% endblock page_content %}

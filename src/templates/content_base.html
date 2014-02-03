@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Eric's naming day{% endblock title %}
+
+{% block content %}
+  
+  <article>
+    <h1>{% block page_heading %}{% endblock %}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+          </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <p>
+        {{ NAMING_DAY_START_TIME|date:"DATETIME_FORMAT" }}
+      <span class="hidden-phone">
+         &mdash; {{ NAMING_DAY_START_TIME|timeuntil }} to go!
+      </span>
+    </p>
+    
+    {% block page_content %}{% endblock %}
+  </article>
+{% endblock content %}
