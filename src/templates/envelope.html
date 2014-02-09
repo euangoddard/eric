@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block css %}
+
+    <link
+        href="//fonts.googleapis.com/css?family=Open+Sans:400,300|Homemade+Apple"
+        rel="stylesheet"
+        type="text/css"
+    >
+    <link
+        href="{% static 'css/envelope.css' %}"
+        rel="stylesheet"
+        media="screen"
+    >
+{% endblock %}
+
+{% block content %}
+
+    <div class="envelope-viewport" ng-toggle-class="flipped">
+        <div class="envelope">
+            <div class="face front">
+                <div class="flap top">
+
+                </div>
+            </div>
+            <div class="face back">
+                <h1>
+                    Max
+                </h1>
+                <p>
+                    Click to open
+                </p>
+            </div>
+        </div>
+
+            <div class="letter" ng-click="$event.stopPropagation();">
+                <h2>
+                    Max,
+                </h2>
+                <p>
+                    You are cordially invited to the naming party for Eric!
+                </p>
+                <p>
+                    Please RSVP using the form below, or call us on 00000 000000:
+                </p>
+                <form>
+                    <ul>
+                        <li>
+                            <label>
+                                Will you be coming?
+                            </label>
+                            <select>
+                                <option>
+                                    ----
+                                </option>
+                                <option>
+                                    Undecided
+                                </option>
+                                <option>
+                                    I'd love to come
+                                </option>
+                                <option>
+                                    I'll be celebrating from a distance
+                                </option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>
+                                Do you have any special requirements?
+                            </label>
+                            <textarea></textarea>
+                        </li>
+                        <li>
+                            <button>
+                                Send
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </form>
+                <section id="where">
+                <h3>
+                    Location information
+                </h3>
+                <p>
+                  We'll be celebrating at <a href="https://maps.google.co.uk/maps?q=William+Osler+House,+Osler+Road,+Headington,+Oxford&amp;hl=en&amp;sll=47.73855,12.508828&amp;sspn=42.417597,65.478516&amp;oq=osler+hou&amp;t=m&amp;z=16" target="_blank">Osler House, in Headington, Oxford</a>.
+                </p>
+                <h4>Full address</h4>
+                <address>
+                  William Osler House<br />
+                  Osler Road<br />
+                  Headington<br />
+                  Oxford<br />
+                  OX3 9BL
+                </address>
+
+                <h4>Map to the venue</h4>
+                <p>Click to go to google maps</p>
+                <p class="hidden-phone">
+                  <a href="https://maps.google.co.uk/maps?q=William+Osler+House,+Osler+Road,+Headington,+Oxford&amp;hl=en&amp;sll=47.73855,12.508828&amp;sspn=42.417597,65.478516&amp;oq=osler+hou&amp;t=m&amp;z=16" target="_blank">
+                    <img src="http://maps.googleapis.com/maps/api/staticmap?center=William+Osler+House,+Osler+Road,+Headington,+Oxford&amp;zoom=16&amp;scale=2&amp;size=640x320&amp;maptype=roadmap&amp;markers=color:blue%7CWilliam+Osler+House,+Osler+Road,+Headington,+Oxford&amp;sensor=false" alt="Map" id="map">
+                  </a>
+                </p>
+                <p class="visible-phone">
+                  <a href="https://maps.google.co.uk/maps?q=William+Osler+House,+Osler+Road,+Headington,+Oxford&amp;hl=en&amp;sll=47.73855,12.508828&amp;sspn=42.417597,65.478516&amp;oq=osler+hou&amp;t=m&amp;z=16" target="_blank">
+                    <img src="http://maps.googleapis.com/maps/api/staticmap?center=William+Osler+House,+Osler+Road,+Headington,+Oxford&amp;zoom=16&amp;scale=1&amp;size=480x320&amp;maptype=roadmap&amp;markers=color:blue%7CWilliam+Osler+House,+Osler+Road,+Headington,+Oxford&amp;sensor=false" alt="Map" id="map">
+                  </a>
+                </p>
+
+                <h4>Getting there</h4>
+                <h5>By car</h5>
+                <p>
+                  There should be ample parking at the venue and if the car park is full, there is ample parking at the John Radcliffe hospital, round the corner.
+                </p>
+                <p>
+                  Parking at Osler House is free for our guests. If the car park is full and you use the John Radcliffe car park, there will be a charge. See <a href="http://www.ouh.nhs.uk/hospitals/jr/find-us/car.aspx" target="_blank">their page for car users</a>.
+                </p>
+                <h5>By bus</h5>
+                <p>
+                  Any buses that go to the <a href="http://city.oxfordbus.co.uk/buses-jr-hospital/" target="_blank">John Radcliffe Hospital</a> will be a good choice as Osler House is in the grounds of the Hospital.
+                </p>
+                <h5>Cycling and walking</h5>
+              </section>
+
+            </div>
+    </div>
+
+{% endblock %}
