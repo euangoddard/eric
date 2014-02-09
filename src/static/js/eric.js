@@ -1,13 +1,13 @@
 (function (angular) {
     'use strict';
-    
+
     var eric = angular.module('eric', []);
-    
+
     eric.controller('CurrentInviteController', function ($scope, $element, $http) {
         var invite = JSON.parse($element.attr('data-invite'));
         var update_url = $element.attr('data-update-url');
         var csrf_token = $element.attr('data-csrf-token');
-        
+
         $scope.invite = invite;
         $scope.invitees = invite.invitees;
         $scope.is_replying = false;
@@ -17,13 +17,13 @@
         $scope.stop_replying = function () {
             $scope.is_replying = false;
         };
-        
+
         $scope.options = [
             {value: null, label: 'Undecided'},
             {value: true, label: "I'd love to come"},
             {value: false, label: "Can't make it"},
         ];
-        
+
         $scope.update_invitee = function (invitee) {
             var post_data = angular.copy(invitee);
             try {
@@ -31,7 +31,7 @@
             } catch (e) {
                 post_data.is_attending = null;
             }
-            
+
             $scope.is_saving = true;
             $http.defaults.headers.post["X-CSRFToken"] = csrf_token;
             $http.post(update_url, post_data).then(function (response) {
@@ -40,5 +40,19 @@
             });
         };
     });
-    
+
+    eric.directive("ngToggleClass", function () {
+        return {
+            restrict: 'A',
+            compile: function (element, attr) {
+                var classes = attr.ngToggleClass.split(',');
+                element.bind('click', function () {
+                    angular.forEach(classes, function (value) {
+                        (element.hasClass(value)) ? element.removeClass(value) : element.addClass(value);
+                    });
+                });
+            }
+        }
+    });
+
 })(window.angular);
