@@ -188,6 +188,15 @@ span.hidden-phone {
   }
 }
 
+a.info {
+    background-repeat: no-repeat;
+    background-position: 0 center;
+    background-image: url(/static/img/info-white.png);
+    padding-left: 2.5em;
+    line-height: 2em;
+    font-size: 32px;
+    display: inline-block;
+}
 
 /* Info page */
 section {
@@ -209,4 +218,7 @@ section img {
 }
 #where h2 {
     background-image: url(/static/img/location-white.png);
+}
+#gifts h2 {
+    background-image: url(/static/img/gift-white.png);
 }
