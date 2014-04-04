@@ -10,6 +10,7 @@ from django.http.response import HttpResponseBadRequest
 from django.http.response import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.template.defaultfilters import yesno
 from django.template.response import TemplateResponse
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
@@ -89,7 +90,7 @@ view_manage_options = \
 
 @login_required
 @user_passes_test(lambda user: user.is_staff)
-def export_data_as_csv(request):
+def export_invites_as_csv(request):
     rows = [["Email", "Name", "Invite URL"]]
     for invite in Invite.objects.prefetch_related("invitees"):
         invite_url = reverse("app_start", kwargs={"invite_key": invite.key})
@@ -103,6 +104,26 @@ def export_data_as_csv(request):
     
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = "attachment; filename=invites.csv"
+    csv_writer = csv.writer(response)
+    csv_writer.writerows(rows)
+    return response
+
+
+@login_required
+@user_passes_test(lambda user: user.is_staff)
+def export_invitees_as_csv(request):
+    rows = [["Invite Email", "Name", "Is attending?", "Special requirements"]]
+    for invitee in Invitee.objects.select_related("invitee"):
+        row = [
+            invitee.invite.email.encode("utf8"),
+            invitee.name.encode("utf8"),
+            yesno(invitee.is_attending).encode("utf8"),
+            unicode(invitee.special_requirements).encode("utf8"),
+            ]
+        rows.append(row)
+    
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = "attachment; filename=invitees.csv"
     csv_writer = csv.writer(response)
     csv_writer.writerows(rows)
     return response

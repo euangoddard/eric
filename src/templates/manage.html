@@ -8,6 +8,7 @@
 {% block page_content %}
   <ul>
     <li><a href="{% url 'data_import' %}">Import invites</a></li>
-    <li><a href="{% url 'data_export' %}">Download invites data</a></li>
+    <li><a href="{% url 'invites_export' %}">Download invites data</a></li>
+    <li><a href="{% url 'invitees_export' %}">Download invitees data</a></li>
   </ul>
 {% endblock page_content %}

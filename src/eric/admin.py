@@ -6,7 +6,7 @@ from eric.models import Invite
 from eric.models import Invitee
 
 
-class InviteeAdmin(TabularInline):
+class InviteeInlineAdmin(TabularInline):
     
     model = Invitee
 
@@ -15,7 +15,7 @@ class InviteAdmin(ModelAdmin):
     
     list_display = ("key", "email", "invitees")
     
-    inlines = (InviteeAdmin, )
+    inlines = (InviteeInlineAdmin, )
     
     def invitees(self, invite):
         invitee_names = invite.invitees.values_list("name", flat=True)
@@ -26,4 +26,17 @@ class InviteAdmin(ModelAdmin):
         return label
 
 
+class InviteeAdmin(ModelAdmin):
+    
+    list_display = (
+        "invite",
+        "name",
+        "is_attending",
+        "special_requirements",
+    )
+    
+    list_filter = ("is_attending", )
+
+
 site.register(Invite, InviteAdmin)
+site.register(Invitee, InviteeAdmin)

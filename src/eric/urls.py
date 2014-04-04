@@ -20,7 +20,8 @@ _MANAGEMENT_PATTERNS = patterns(
     "eric.views",
 
     url(r"^import/$", "import_invites", name="data_import"),
-    url(r"^export/$", "export_data_as_csv", name="data_export"),
+    url(r"^export-invites/$", "export_invites_as_csv", name="invites_export"),
+    url(r"^export-invitees/$", "export_invitees_as_csv", name="invitees_export"),
     url(r"^$", "view_manage_options", name="management_home"),
 
     )
